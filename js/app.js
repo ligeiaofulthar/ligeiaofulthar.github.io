@@ -64,9 +64,11 @@ function createNav(sectionArray) {
         // add class
         a.className = 'header__nav-link';
 
-        //TODO: autogenerate id
         // add id
-        a.id = "section__link--one";
+        let newId = (sectionArray[i]);
+        newId = newId.replace(/ /, "__link--");
+        a.id = newId;
+        console.log(newId);
 
         //add href
         let newHref = (sectionArray[i]);
@@ -94,26 +96,27 @@ nav.insertAdjacentElement('afterend', createNav(sectionArray));
 const sections = document.getElementsByTagName('section');
 const links = document.querySelectorAll('.header__nav-link');
 
-window.addEventListener('scroll', function(highlight) {
-    console.log("hello");
-    // while(sections.length < 0) {
-  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50 ) {
-        document.getElementByName(".header__nav-link").className = "active";
-} else {
-        document.getElementByName(".header__nav-link").className = "";
-}
 
-});
+// window.addEventListener('scroll', function(highlight) {
+//     console.log("hello");
+//     // while(sections.length < 0) {
+//   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50 ) {
+//         document.getElementByName(".header__nav-link").className = "active";
+// } else {
+//         document.getElementByName(".header__nav-link").className = "";
+// }
 
-function scrollSmooth() {
-    const hash = document.querySelector('.header__nav-link');
-    hash.scrollTo({
-        top: 100,
-        left: 100,
-        behavior: 'smooth'
-      });
+// });
 
-  }
+// function scrollSmooth() {
+//     const hash = document.querySelector('.header__nav-link');
+//     hash.scrollTo({
+//         top: 100,
+//         left: 100,
+//         behavior: 'smooth'
+//       });
+
+//   }
 
 //   if (sections > 10 ) {
 //     links.forEach(link =>
