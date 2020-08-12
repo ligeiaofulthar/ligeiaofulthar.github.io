@@ -1,0 +1,84 @@
+html {
+    background-color: #1b1b1b;
+    font-family: 'Roboto Mono', monospace;
+    color: white;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 80rem;
+    margin: 0 auto;
+}
+
+section {
+    height: 100vh;
+    border: solid 2px greenyellow;
+}
+
+.section__wrapper {
+    padding: 4rem 3rem;
+
+}
+
+h1 {
+    border: solid 2px blue;
+}
+
+p {
+    font-weight: 400;
+}
+
+.sidebar {
+    background-color: yellowgreen;
+    position: fixed;
+    border: solid 4px blue;
+    box-sizing: border-box;
+
+}
+
+.sidebar--wrapper {
+    padding: 2rem;
+}
+/* media query 64rem laptop screen */
+
+@media screen and (min-width:64rem) {
+    /* general layout */
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto 100px;
+        grid-template-areas:
+        "hd hd hd main main main main main main main main main"
+        "hd hd hd ft ft ft ft ft ft ft ft ft";
+    }
+
+    .main {
+        grid-area: main;
+        width: calc(100vw/120*70);
+    }
+
+    .sidebar {
+        grid-area: hd;
+        height: 100vh;
+        width: calc(100vw/120*30);
+    }
+
+    .footer {
+        grid-area: ft;
+        padding: 2rem 2rem 4rem 2rem;
+        border-bottom: solid 4px yellow;
+        border-top: solid 4px yellow;
+        bottom: 0;
+    }
+
+}
+
+.active {
+    color: pink;
+    background-color: blue;
+}
