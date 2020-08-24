@@ -1,40 +1,29 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
 });
-// choose navigation
-// create li
-// create a
-// create insert variables for href ?
-// loop over section ids and insert into href
-// if new section is added insert to nav
-// check for reflow and repaint
-// wrap inside function for nav
-// call function
 
-// const nav = document.querySelector('.nav__menu');
-// const li = document.createElement('li');
-// const a = document.createElement('a');
 
-// a.className = 'header__nav-link';
-// <a class="header__nav-link" id="section__link--one" href="#section--one" aria-current="page">about</a>
-// const aClass = a.outerHTML;
-// console.log(aClass);
+//helper function for inViewport
 
-// a.id = "section__link--one";
-// const aId = a.outerHTML;
-// console.log(aId);
+function inViewport (elem) {
+	let distance = elem.getBoundingClientRect();
+	return (
+		distance.top >= 0 &&
+		distance.left >= 0 &&
+		distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+};
 
-// a.href = "#section--one";
-// const aHref = a.outerHTML;
-// console.log(aHref);
 
-// const sectionName = document.getElementsByTagName('section');
-// const sectionId = [...sectionName];
-// console.log(sectionId);
+// if(coordinate >= 0 || otherCoordinate >= 0) {
 
-// var hui = "textContent" in document.body ? "textContent" : "innerText";
-// var text = document.getElementsByTagName("h1")[0][hui];
-// console.log(text);
+// }
+
+
+// no global variables
+// check for let and const
+
 
 // get every h1
 const sectionH = document.getElementsByTagName('h1');
@@ -68,13 +57,11 @@ function createNav(sectionArray) {
         let newId = (sectionArray[i]);
         newId = newId.replace(/ /, "__link--");
         a.id = newId;
-        console.log(newId);
 
         //add href
         let newHref = (sectionArray[i]);
         newHref = newHref.replace(/ /, "--");
         a.href = '#'+newHref;
-        console.log(newHref);
 
         const newText = document.createTextNode(sectionArray[i]);
 
@@ -84,47 +71,96 @@ function createNav(sectionArray) {
         li.appendChild(a);
         //add li to nav
         nav.appendChild(li);
+
     }
     return nav;
+
 }
 
 nav.insertAdjacentElement('afterend', createNav(sectionArray));
 
+
+// function scrollToSection() {
+//     let navi = document.getElementsByTagName("LI");
+//     let section = document.getElementsByTagName("SECTION");
+
+//     for (let i = 0; i < navi.length; i++) {
+//         navi[i].addEventListener("click", (ev)=>{
+//             ev.preventDefault;
+
+//             section[i].scrollIntoView({behavior: "smooth"});
+//             console.log(section);
+//         });
+//     };
+// }
+
+function scrollToSection() {
+    let links = document.querySelectorAll('a[href^="#"]');
+
+    links.forEach(link => {
+        link.addEventListener('click', function (evt) {
+            evt.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+
+
+
+
+scrollToSection();
+
+
+// TODO:
+// Add functionality to distinguish the section in view. While navigating through the page, the section that is active in the viewport/closest to the top should be distinguished from the other sections.
+// Are you listening for an event for sections to become active?
+// How are you going to test which section should be highlighted?
+// How can we use classList methods to change the CSS being displayed? What about removing that CSS?
+// Check the HTML and CSS files to ensure that what you chose is updated in the other locations.
+
+// function activeSection() {
+    // window.addEventListener('scroll', function (evt) {
+    //     const sections = document.querySelectorAll('section');
+    //     const navLinks = document.querySelectorAll('header__nav-link');
+
+    //     sections.forEach((section)=>{
+
+    //         if (inViewport(section)) {
+    //             sections.forEach((section)=>{
+    //                 section.classList.add("active");
+    //             });
+    //             console.log("section");
+    //             this.section.classList.add("active");
+
+    //             navLinks.forEach((navLink)=>{
+    //                 navLink.classList.add("active");
+    //         });
+    //     }
+    //             // add class active to current section
+    // // add class active to current navigation item
+    //         else {
+    //             navLinks.forEach((navLink) => {
+
+    //             // deactivate class section
+    //             navLink.classList.remove("active");
+    //             });
+
+    //         }
+
+
+    //     });
+    // }, false);
+
+
+
+// activeSection();
+
 //TODO test for speed
 //TODO It should be clear which section is being viewed while scrolling through the page.
 
-const sections = document.getElementsByTagName('section');
-const links = document.querySelectorAll('.header__nav-link');
-
-
-// window.addEventListener('scroll', function(highlight) {
-//     console.log("hello");
-//     // while(sections.length < 0) {
-//   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50 ) {
-//         document.getElementByName(".header__nav-link").className = "active";
-// } else {
-//         document.getElementByName(".header__nav-link").className = "";
-// }
-
-// });
-
-// function scrollSmooth() {
-//     const hash = document.querySelector('.header__nav-link');
-//     hash.scrollTo({
-//         top: 100,
-//         left: 100,
-//         behavior: 'smooth'
-//       });
-
-//   }
-
-//   if (sections > 10 ) {
-//     links.forEach(link =>
-//         link.classList.add("active"));
-// } else {
-//     links.forEach(link =>
-//         link.classList.remove("active"));
-// }
 
 
 // listen for scroll
@@ -140,132 +176,56 @@ const links = document.querySelectorAll('.header__nav-link');
 // } else
 // remove Active
 
+function linkActive() {
+    links.forEach((link)=>{
+        link.classList.add("active-nav");
+    });
 
+}
 
-
-// function getH1() {
-
-//     sectionH1.forEach(function (item, index) {
-//         const textH1 = singleH1[index].textContent;
-//         console.log(textH1);
-//         return textH1;
-//     });
-
-// };
-// getH1();
-
-// const singleH1 = arrayH1.textContent;
-// // const navName = document.querySelector("section > div > h1");
-// console.log(singleH1);
-
-
-//returns array of section ids e.g. [0] <section id="section--one">…</section>
-// const sectionId = document.getElementsByTagName('section')[0].id;
-
-// const sectionId = ["<section class='section--one'", "<section class='section--two'", "<section class='section--three'"];
-
-
-// forEach loop gets id from every section and splits it
-
-// function getId() {
-
-//     sectionId.forEach(function (item, index) {
-//         const seperateId = sectionId[index].id;
-//         console.log('old'+seperateId);
-//         return seperateId;
-//     });
-
-// };
-// getId();
-
-// sectionId.forEach(function (li, index) {
-//     const hello = getId();
-// console.log(hello);
-// return hello;
-// });
-
-
-// var i;
-// for (i = 0; i < 1; i++) {
-    // sectionId[i].style.color = "red";
-
-
-        // for (var j = 0; j < 3; j++) {
-        //     var hui = "textContent" in document.body ? "textContent" : "innerText";
-        //     var text = document.getElementsByTagName("h1")[j][hui];
-        //     // var x = document.getElementsByTagName("h1")[j].textContent;
-        //     // document.getElementsByTagName("a").innerHTML = x;
-        //     // console.log(a);
-        //     // console.log(text);
-        //     nav.insertAdjacentElement('afterbegin', li);
-        //     li.insertAdjacentElement('afterbegin', a);
-        //     a.insertAdjacentText('beforeend', text);
-
-        // }
-
-        // .forEach(function (item, index) {
-        //     getId()
-        //     const seperateId = sectionId[index].id;
-        //     console.log(seperateId);
-        //     return seperateId;
-        // });
-
-//   }
-
-// const section = document.getElementById(id);
-
-// for (let i of arr) {
+// function getCurrentId(currentSection) {
+//     currentSection.getAttribute("id");
 
 // }
+let currentSectionId;
+
+const sections = document.querySelectorAll("section");
+const links = document.querySelectorAll(".header__nav-link");
+
+function addLink(currentSectionId){
+
+}
+
+// const linkHref = links.getAttribute("href");
+// const newHref = linkHref.replace(/#/, "");
+console.log(links);
+let link;
+
+window.addEventListener('scroll', function (event) {
+    sections.forEach((section)=>{
+    if (inViewport(section)) {
+        section.classList.add("super");
+        currentSectionId = section.id;
+        console.log(currentSectionId);
+        links.forEach((link)=>{
+            if (link.getAttribute('href') == `#${currentSectionId}`) {
+                link.classList.add("active-nav");
+        } else {
+            link.classList.remove("active-nav");
+
+        }
+            });
+// addLink(section);
+            // links.classList.add("active-nav");
 
 
-// let navLinkClass = document.getElementsByClassName('.header__nav-link');
-// let hrefSection = document.getElementById('section__link--one').href;
-// let sectionId = document.getElementById('section__link--one').id;
+        // getCurrentId();
+        // linkActive();
 
-// hrefSection.innerHTML = `href="${hrefSection}"`;
-// console.log(sectionId);
+    } else {
+        section.classList.remove("super");
 
-// '<a class='+navLinkClass+' id='+idName+' href='+hrefSection
+    }
 
-
-
-// const navMenu = document.querySelector('.nav__menu');
-// const navLi = document.createElement('li');
-
-// navLi.textContent = 'hello';
-// navMenu.insertAdjacentElement('afterbegin', navLi);
-
-// const mainHeading = document.querySelector('#main-heading');
-// const htmlTextToAdd = '<h2>Skydiving is fun!</h2>';
-
-// mainHeading.insertAdjacentHTML('afterend', htmlTextToAdd);
-
-// const myPara = document.createElement('p');
-
-// myPara.textContent = 'I am the text for the paragraph!';
-// document.body.appendChild(myPara);
-
-
-// let count = 1
-
-// function generateParagraphs() {
-//     const fragment = document.createDocumentFragment();
-
-//     for (let i = 1; i <= 500; i++) {
-//         const newElement = document.createElement('p');
-//         newElement.textContent = 'This is paragraph number ' + count;
-//         count = count + 1;
-
-//         fragment.appendChild(newElement);
-//     }
-
-//     document.body.appendChild(fragment);
-
-//     if (count < 20000) {
-//         setTimeout(generateParagraphs, 0);
-//     }
-// }
-
-// generateParagraphs();
-
+}, false);
+});
