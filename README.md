@@ -7,7 +7,7 @@ Landing Page for udacity course
 
 ## Instructions
 
-In this project, I implement a navigation that dynamically updates itself, if new code is added. The current section in viewport gets highlighted. If a navigation link is clicked, it scrolls to the corresponding section. The selected nav-item is going to be highlighted.
+In this project, I implement a navigation that dynamically updates itself, if headlines are added. The current section in viewport gets highlighted, as well as the corresponding link. If a navigation link is clicked, it scrolls to the corresponding section.
 
 To look at my project, open `index.html`
 
