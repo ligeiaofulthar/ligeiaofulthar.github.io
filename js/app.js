@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    console.log("DOM fully loaded and parsed");
 });
 
 //TODO:
@@ -7,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 // check for let and const
 
 //helper function for inViewport
-
 function inViewport (elem) {
 	let distance = elem.getBoundingClientRect();
 	return (
@@ -48,7 +46,6 @@ function createNav(sectionArray) {
 
         // add id
         let newId = (sectionArray[i]);
-        // newId = newId.replace(/ /, "__link--");
         newId = newId.replace(/\s+/g, '');
         a.id = newId;
 
@@ -92,22 +89,13 @@ function scrollToSection() {
 
 scrollToSection();
 
-// TODO:
-// Add functionality to distinguish the section in view. While navigating through the page, the section that is active in the viewport/closest to the top should be distinguished from the other sections.
-// Are you listening for an event for sections to become active?
-// How are you going to test which section should be highlighted?
-// How can we use classList methods to change the CSS being displayed? What about removing that CSS?
-// Check the HTML and CSS files to ensure that what you chose is updated in the other locations.
 
+// Section in View
 let currentSectionId;
 
 const sections = document.querySelectorAll("section");
 const links = document.querySelectorAll(".header__nav-link");
 
-
-// const linkHref = links.getAttribute("href");
-// const newHref = linkHref.replace(/#/, "");
-console.log(links);
 let link;
 
 window.addEventListener('scroll', function (event) {
@@ -115,7 +103,6 @@ window.addEventListener('scroll', function (event) {
         if (inViewport(section)) {
             section.classList.add("super");
             currentSectionId = section.id;
-            console.log(currentSectionId);
             links.forEach((link)=>{
                 if (link.getAttribute('href') == `#${currentSectionId}`) {
                     link.classList.add("active-nav");
