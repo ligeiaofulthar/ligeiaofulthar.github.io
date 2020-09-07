@@ -55,12 +55,14 @@ function createNav(sectionArray) {
 
         // add id
         let newId = (sectionArray[i]);
-        newId = newId.replace(/ /, "__link--");
+        // newId = newId.replace(/ /, "__link--");
+        newId = newId.replace(/\s+/g, '');
         a.id = newId;
 
         //add href
         let newHref = (sectionArray[i]);
-        newHref = newHref.replace(/ /, "--");
+        newHref = newHref.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
+        newHref = newHref.toLowerCase();
         a.href = '#'+newHref;
 
         const newText = document.createTextNode(sectionArray[i]);
@@ -78,7 +80,6 @@ function createNav(sectionArray) {
 }
 
 nav.insertAdjacentElement('afterend', createNav(sectionArray));
-
 
 // function scrollToSection() {
 //     let navi = document.getElementsByTagName("LI");
@@ -102,7 +103,9 @@ function scrollToSection() {
             evt.preventDefault();
 
             document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+                behavior: 'smooth',
+                block: "center",
+                inline: "nearest"
             });
         });
     });
@@ -176,12 +179,7 @@ scrollToSection();
 // } else
 // remove Active
 
-function linkActive() {
-    links.forEach((link)=>{
-        link.classList.add("active-nav");
-    });
 
-}
 
 // function getCurrentId(currentSection) {
 //     currentSection.getAttribute("id");
@@ -192,9 +190,6 @@ let currentSectionId;
 const sections = document.querySelectorAll("section");
 const links = document.querySelectorAll(".header__nav-link");
 
-function addLink(currentSectionId){
-
-}
 
 // const linkHref = links.getAttribute("href");
 // const newHref = linkHref.replace(/#/, "");
@@ -229,3 +224,75 @@ window.addEventListener('scroll', function (event) {
 
 }, false);
 });
+
+
+const headlines = document.querySelectorAll('h1');
+const headlinesId = [];
+
+// function headline(){
+headlines.forEach((headline, index) => {
+    headline = headline.innerText.toLowerCase();
+    headline = headline.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
+    headlinesId.push(headline);
+
+
+    console.log(headline); // the elment
+
+  console.log(index); // the index in the NodeList
+});
+console.log(headlinesId); // the index in the NodeList
+// }
+
+
+// function addIdToSection() {
+
+    //get h1 array
+    // delete all whitespace
+    // sections array
+    //assign h1 as id to section
+
+
+    // headlinesId.forEach((element)=>{
+
+    // sections.forEach((section)=>{
+    //         section.id = `#${element}`;
+
+    //         });
+    //     });
+
+// addIdToSection();
+// const nopla = document.getElementsByTagName("section");
+// let section2 = nopla[1];
+
+// section2.id = "hello";
+// console.log(section2);
+
+// nopla.forEach((helps)=>{
+//     helps.id = "fuß";
+// console.log(helps);
+//     });
+
+const sectionN = document.getElementsByTagName('section');
+const sectionA = Array.from(sectionN);
+console.log(headlinesId);
+    // console.log(section);
+
+    // headlinesId.forEach((element)=>{
+        // sectionA.forEach((section) => {
+            //  for (i = sectionA.length -1; i >= 0; i--) {
+
+for (i = 0; i < sectionA.length; i++) {
+    sectionA[i].id =`${headlinesId[i]}`;
+    console.log(sectionA[i])
+                // for (j = 0; j < headlinesId.length; j++) {
+                // for (j = headlinesId.length -1; j >= 0; j--) {
+    
+                }
+        
+    // });
+// });
+
+
+// for (i = 0; i < sectionA.length; i++) {
+//     sectionA[i].id =`${headlinesId[i]}`;
+//     console.log(sectionA[i])
