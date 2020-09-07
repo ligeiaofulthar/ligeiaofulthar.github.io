@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
 });
 
+//TODO:
+// no global variables
+// check for let and const
 
 //helper function for inViewport
 
@@ -14,16 +17,6 @@ function inViewport (elem) {
 		distance.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
 };
-
-
-// if(coordinate >= 0 || otherCoordinate >= 0) {
-
-// }
-
-
-// no global variables
-// check for let and const
-
 
 // get every h1
 const sectionH = document.getElementsByTagName('h1');
@@ -73,7 +66,6 @@ function createNav(sectionArray) {
         li.appendChild(a);
         //add li to nav
         nav.appendChild(li);
-
     }
     return nav;
 
@@ -81,20 +73,7 @@ function createNav(sectionArray) {
 
 nav.insertAdjacentElement('afterend', createNav(sectionArray));
 
-// function scrollToSection() {
-//     let navi = document.getElementsByTagName("LI");
-//     let section = document.getElementsByTagName("SECTION");
-
-//     for (let i = 0; i < navi.length; i++) {
-//         navi[i].addEventListener("click", (ev)=>{
-//             ev.preventDefault;
-
-//             section[i].scrollIntoView({behavior: "smooth"});
-//             console.log(section);
-//         });
-//     };
-// }
-
+// scroll to Section
 function scrollToSection() {
     let links = document.querySelectorAll('a[href^="#"]');
 
@@ -111,11 +90,7 @@ function scrollToSection() {
     });
 }
 
-
-
-
 scrollToSection();
-
 
 // TODO:
 // Add functionality to distinguish the section in view. While navigating through the page, the section that is active in the viewport/closest to the top should be distinguished from the other sections.
@@ -124,67 +99,6 @@ scrollToSection();
 // How can we use classList methods to change the CSS being displayed? What about removing that CSS?
 // Check the HTML and CSS files to ensure that what you chose is updated in the other locations.
 
-// function activeSection() {
-    // window.addEventListener('scroll', function (evt) {
-    //     const sections = document.querySelectorAll('section');
-    //     const navLinks = document.querySelectorAll('header__nav-link');
-
-    //     sections.forEach((section)=>{
-
-    //         if (inViewport(section)) {
-    //             sections.forEach((section)=>{
-    //                 section.classList.add("active");
-    //             });
-    //             console.log("section");
-    //             this.section.classList.add("active");
-
-    //             navLinks.forEach((navLink)=>{
-    //                 navLink.classList.add("active");
-    //         });
-    //     }
-    //             // add class active to current section
-    // // add class active to current navigation item
-    //         else {
-    //             navLinks.forEach((navLink) => {
-
-    //             // deactivate class section
-    //             navLink.classList.remove("active");
-    //             });
-
-    //         }
-
-
-    //     });
-    // }, false);
-
-
-
-// activeSection();
-
-//TODO test for speed
-//TODO It should be clear which section is being viewed while scrolling through the page.
-
-
-
-// listen for scroll
-// // add aria-current
-// if section in viewport
-// add class to nav Element
-
-// loop through sections
-
-// if (current link is in viewport) {
-//     links.forEach(link =>
-//         link.classList.add("active"));
-// } else
-// remove Active
-
-
-
-// function getCurrentId(currentSection) {
-//     currentSection.getAttribute("id");
-
-// }
 let currentSectionId;
 
 const sections = document.querySelectorAll("section");
@@ -198,34 +112,24 @@ let link;
 
 window.addEventListener('scroll', function (event) {
     sections.forEach((section)=>{
-    if (inViewport(section)) {
-        section.classList.add("super");
-        currentSectionId = section.id;
-        console.log(currentSectionId);
-        links.forEach((link)=>{
-            if (link.getAttribute('href') == `#${currentSectionId}`) {
-                link.classList.add("active-nav");
-        } else {
-            link.classList.remove("active-nav");
-
-        }
+        if (inViewport(section)) {
+            section.classList.add("super");
+            currentSectionId = section.id;
+            console.log(currentSectionId);
+            links.forEach((link)=>{
+                if (link.getAttribute('href') == `#${currentSectionId}`) {
+                    link.classList.add("active-nav");
+                } else {
+                    link.classList.remove("active-nav");
+                }
             });
-// addLink(section);
-            // links.classList.add("active-nav");
-
-
-        // getCurrentId();
-        // linkActive();
-
-    } else {
-        section.classList.remove("super");
-
-    }
-
-}, false);
+        } else {
+            section.classList.remove("super");
+        }
+    }, false);
 });
 
-
+// get headlines
 const headlines = document.querySelectorAll('h1');
 const headlinesId = [];
 
@@ -234,65 +138,11 @@ headlines.forEach((headline, index) => {
     headline = headline.innerText.toLowerCase();
     headline = headline.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
     headlinesId.push(headline);
-
-
-    console.log(headline); // the elment
-
-  console.log(index); // the index in the NodeList
 });
-console.log(headlinesId); // the index in the NodeList
-// }
-
-
-// function addIdToSection() {
-
-    //get h1 array
-    // delete all whitespace
-    // sections array
-    //assign h1 as id to section
-
-
-    // headlinesId.forEach((element)=>{
-
-    // sections.forEach((section)=>{
-    //         section.id = `#${element}`;
-
-    //         });
-    //     });
-
-// addIdToSection();
-// const nopla = document.getElementsByTagName("section");
-// let section2 = nopla[1];
-
-// section2.id = "hello";
-// console.log(section2);
-
-// nopla.forEach((helps)=>{
-//     helps.id = "fuß";
-// console.log(helps);
-//     });
 
 const sectionN = document.getElementsByTagName('section');
 const sectionA = Array.from(sectionN);
-console.log(headlinesId);
-    // console.log(section);
-
-    // headlinesId.forEach((element)=>{
-        // sectionA.forEach((section) => {
-            //  for (i = sectionA.length -1; i >= 0; i--) {
 
 for (i = 0; i < sectionA.length; i++) {
     sectionA[i].id =`${headlinesId[i]}`;
-    console.log(sectionA[i])
-                // for (j = 0; j < headlinesId.length; j++) {
-                // for (j = headlinesId.length -1; j >= 0; j--) {
-    
-                }
-        
-    // });
-// });
-
-
-// for (i = 0; i < sectionA.length; i++) {
-//     sectionA[i].id =`${headlinesId[i]}`;
-//     console.log(sectionA[i])
+}
