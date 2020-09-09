@@ -2,9 +2,8 @@ html {
     background-color: #ffe2d1;
     font-family: 'Roboto Mono', monospace;
     color: #1c1c1c;
-        --scroll-behavior: smooth;
-        scroll-behavior: smooth;
-
+    --scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -18,8 +17,21 @@ body {
 }
 
 .active-nav {
-    background-color: tomato;
+    background-color: #B96D40;
     color: white;
+}
+
+a {
+    color: #1D8A99;
+    font-weight: 600;
+    text-decoration: none;
+    line-height: 1.7;
+    transition: ease-in 0.2s;
+    padding: 0.2rem;
+}
+
+a:hover {
+    color: #A4D4B4;
 }
 
 main {
@@ -28,18 +40,8 @@ main {
 }
 
 section {
-    height: calc(100vh - 30vh);
     transition: 0.3s ease-in-out;
     border-bottom: solid 4px #1c1c1c;
-
-}
-
-#section--one {
-}
-
-.section__wrapper {
-    padding: 4rem 3rem;
-
 }
 
 #navi {
@@ -51,111 +53,125 @@ li {
     display: inline-block;
     padding: 0.5rem;
 }
-a {
-    text-decoration: none;
-}
-
-h1 {
-    font-size: 1.9rem;
-}
 
 p {
     font-weight: 400;
-    font-size: 1.3rem;
     line-height: 1.6;
 }
 
 .sidebar {
     background-color: #ffe2d1;
-    border-top: solid 4px #1c1c1c;
-    border-bottom: solid 4px #1c1c1c;
+    border-right: solid 4px #1c1c1c;
     box-sizing: border-box;
-    position: fixed;
+    position: sticky;
     top: 0;
-
 }
 
 .sidebar--wrapper {
     padding: 2rem;
     display: flex;
     flex-wrap: wrap;
-justify-content: space-between;
-align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
-/* @media screen and (min-width:0rem) { */
-    /* .container {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-template-rows: auto 100px;
-        grid-template-areas:
-        "hd hd main main main main main main main main main main"
-        "hd hd ft ft ft ft ft ft ft ft ft ft";
-    } */
 
-    /* .main {
-        padding-top: 20vh;
-    }
-
-    .sidebar {
-        grid-area: hd;
-        height: 20vh;
-        width: 100vw;
-    }
-} */
-
-/* @media screen and (min-width: 48rem) {
+@media screen and (min-width:0rem) {
     .container {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: auto 100px;
         grid-template-areas:
-        "hd hd main main main main main main main main main main"
-        "hd hd ft ft ft ft ft ft ft ft ft ft";
+            "hd hd hd hd main main main main main main main main"
+            "hd hd hd hd ft ft ft ft ft ft ft ft";
     }
-
     .main {
         grid-area: main;
-        width: calc(100vw/120*70);
     }
-
     .sidebar {
         grid-area: hd;
         height: 100vh;
-        width: calc(100vw/120*30);
     }
-} */
+    .footer {
+        /* grid-area: ft; */
+        padding: 0.5rem 0.5rem 1rem 0.5rem;
+        bottom: 0;
+        grid-area: ft;
+        font-size: 0.8rem;
+    }
+    p {
+        font-size: 0.8rem;
+    }
+    h1 {
+        font-size: 1rem;
+    }
+    section {
+        height: auto;
+    }
+    #navi {
+        padding: 0;
+        font-size: 0.6rem;
+    }
+    .section__wrapper {
+        padding: 1rem 1rem;
+    }
+}
+
+@media screen and (min-width: 48rem) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: auto 100px;
+        grid-template-areas:
+            "hd hd hd main main main main main main main main main"
+            "hd hd hd ft ft ft ft ft ft ft ft ft";
+    }
+    .main {
+        grid-area: main;
+    }
+    .sidebar {
+        grid-area: hd;
+        height: 100vh;
+    }
+    p {
+        font-size: 1.3rem;
+        ;
+    }
+    h1 {
+        font-size: 1.9rem;
+    }
+    .section__wrapper {
+        padding: 4rem 6rem;
+    }
+    .footer {
+        padding: 2rem;
+        font-size: 1rem;
+    }
+    #navi {
+        font-size: 1rem;
+    }
+}
+
 
 /* media query 64rem laptop screen */
 
-/* @media screen and (min-width:64rem) { */
-    /* general layout */
-
+@media screen and (min-width:64rem) {
+    /*general layout */
     .container {
-        /* display: grid;
+        display: grid;
         grid-template-columns: repeat(12, 1fr);
         grid-template-rows: auto;
         grid-template-areas:
-        "hd hd hd hd hd hd hd hd hd hd hd hd"
-        "main main main main main main main main main main main main"
-        "ft ft ft ft ft ft ft ft ft ft ft ft"; */
+            "hd hd main main main main main main main main main main"
+            "hd hd ft ft ft ft ft ft ft ft ft ft";
     }
-
     .main {
         /* grid-area: main; */
-        padding-top: 11vh;
     }
-
     .sidebar {
         /* grid-area: hd; */
-        height: 10vh;
-        width: 100vw;
+        height: 100vh;
     }
-
-    .footer {
-        /* grid-area: ft; */
-        padding: 2rem 2rem 4rem 2rem;
-        border-bottom: solid 4px #1c1c1c;
-        border-top: solid 4px #1c1c1c;
-        bottom: 0;
+    section {
+        height: calc(100vh - 20vh);
     }
-
+}
