@@ -121,7 +121,7 @@ const headlines = document.querySelectorAll('h1');
 const headlinesId = [];
 
 // function headline(){
-headlines.forEach((headline, index) => {
+headlines.forEach((headline) => {
     headline = headline.innerText.toLowerCase();
     headline = headline.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
     headlinesId.push(headline);
