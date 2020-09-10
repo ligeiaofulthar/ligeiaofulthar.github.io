@@ -1,10 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 });
 
-//TODO:
-// no global variables
-// check for let and const
-
 //helper function for inViewport
 function inViewport (elem) {
 	let distance = elem.getBoundingClientRect();
@@ -22,16 +18,41 @@ const headlines = document.querySelectorAll('h1');
 // make an empty array
 const sectionArray = [];
 
-// loop trough the array of h1s
-for (h = 0; h < headlines.length; h++) {
-    // get the text of h1
-    let link = headlines[h].innerText;
-    //push the text of h1 back into the former empty array sectionArray
-    sectionArray.push(link);
+function getH1(){
+    // loop trough the array of h1s 
+    for (h = 0; h < headlines.length; h++) {
+        // get the text of h1
+        let link = headlines[h].innerText;
+        //push the text of h1 back into the former empty array sectionArray
+        sectionArray.push(link);
+    }
 }
 
+/* helperfunction: turn headline into id and assign to section */
+function headlineToSectionId(){
+    // get headlinesId
+    const headlinesId = [];
+
+    // loop through headlines, turn into lowercase, replace characters and push back into array
+    headlines.forEach((headline) => {
+        headline = headline.innerText.toLowerCase();
+        headline = headline.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
+        headlinesId.push(headline);
+    });
+
+    const sectionN = document.getElementsByTagName('section');
+    const sectionA = Array.from(sectionN);
+
+    // assign id to corresponding section
+    for (i = 0; i < sectionA.length; i++) {
+        sectionA[i].id =`${headlinesId[i]}`;
+    }
+}
+
+/* build dynamic navigation */
 // define nav
 const nav = document.querySelector('.nav__menu');
+getH1();
 
 // create a navigation from the h1s
 function createNav(sectionArray) {
@@ -68,8 +89,6 @@ function createNav(sectionArray) {
 
 }
 
-nav.insertAdjacentElement('afterend', createNav(sectionArray));
-
 // scroll to Section
 function scrollToSection() {
     let links = document.querySelectorAll('a[href^="#"]');
@@ -78,7 +97,7 @@ function scrollToSection() {
         link.addEventListener('click', function (evt) {
             evt.preventDefault();
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
+            document.querySelector(link.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth',
                 block: "center",
                 inline: "nearest"
@@ -87,48 +106,37 @@ function scrollToSection() {
     });
 }
 
+/* highlight section in viewport */
+function addStyleToSection() {
+    let currentSectionId;
+
+    const sections = document.querySelectorAll("section");
+    const links = document.querySelectorAll(".header__nav-link");
+
+    //on scroll if section in viewport, add class to section and corresponding nav element
+    window.addEventListener('scroll', function () {
+        sections.forEach((section)=>{
+            if (inViewport(section)) {
+                section.classList.add("super");
+                currentSectionId = section.id;
+                links.forEach((link)=>{
+                    if (link.getAttribute('href') == `#${currentSectionId}`) {
+                        link.classList.add("active-nav");
+                    } else {
+                        link.classList.remove("active-nav");
+                    }
+                });
+            } else {
+                section.classList.remove("super");
+            }
+        }, false);
+    });
+}
+
+headlineToSectionId();
+
+nav.insertAdjacentElement('afterend', createNav(sectionArray));
+
 scrollToSection();
 
-
-// Section in View
-let currentSectionId;
-
-const sections = document.querySelectorAll("section");
-const links = document.querySelectorAll(".header__nav-link");
-
-let link;
-
-window.addEventListener('scroll', function () {
-    sections.forEach((section)=>{
-        if (inViewport(section)) {
-            section.classList.add("super");
-            currentSectionId = section.id;
-            links.forEach((link)=>{
-                if (link.getAttribute('href') == `#${currentSectionId}`) {
-                    link.classList.add("active-nav");
-                } else {
-                    link.classList.remove("active-nav");
-                }
-            });
-        } else {
-            section.classList.remove("super");
-        }
-    }, false);
-});
-
-// get headlines
-const headlinesId = [];
-
-// function headline(){
-headlines.forEach((headline) => {
-    headline = headline.innerText.toLowerCase();
-    headline = headline.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
-    headlinesId.push(headline);
-});
-
-const sectionN = document.getElementsByTagName('section');
-const sectionA = Array.from(sectionN);
-
-for (i = 0; i < sectionA.length; i++) {
-    sectionA[i].id =`${headlinesId[i]}`;
-}
+addStyleToSection();
