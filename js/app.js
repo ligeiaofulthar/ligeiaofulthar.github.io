@@ -19,7 +19,7 @@ const headlines = document.querySelectorAll('h1');
 const sectionArray = [];
 
 function getH1(){
-    // loop trough the array of h1s 
+    // loop trough the array of h1s
     for (h = 0; h < headlines.length; h++) {
         // get the text of h1
         let link = headlines[h].innerText;
@@ -58,25 +58,23 @@ getH1();
 function createNav(sectionArray) {
     // loop through the now full sectionArray eg. section one, section two, ...
     for (i = 0; i < sectionArray.length; i++) {
-        //create li
         const li = document.createElement('li');
-        // create a
         const a = document.createElement('a');
+        let newId = (sectionArray[i]);
+        let newHref = (sectionArray[i]);
+        const newText = document.createTextNode(sectionArray[i]);
+
         // add class
         a.className = 'header__nav-link';
 
         // add id
-        let newId = (sectionArray[i]);
         newId = newId.replace(/\s+/g, '');
         a.id = newId;
 
         //add href
-        let newHref = (sectionArray[i]);
         newHref = newHref.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').replace(/ +/g, '-');
         newHref = newHref.toLowerCase();
         a.href = '#'+newHref;
-
-        const newText = document.createTextNode(sectionArray[i]);
 
         //add newText to a
         a.appendChild(newText);
@@ -86,7 +84,6 @@ function createNav(sectionArray) {
         nav.appendChild(li);
     }
     return nav;
-
 }
 
 // scroll to Section
