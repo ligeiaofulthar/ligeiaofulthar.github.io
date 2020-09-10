@@ -17,7 +17,7 @@ body {
 }
 
 .active-nav {
-    background-color: #B96D40;
+    background-color: #1c1c1c;
     color: white;
 }
 
@@ -35,7 +35,6 @@ a:hover {
 }
 
 main {
-    /* width: 80rem; */
     margin: 0 auto;
 }
 
@@ -75,6 +74,7 @@ p {
     align-items: center;
 }
 
+/* media query smartphone */
 @media screen and (min-width:0rem) {
     .container {
         display: grid;
@@ -116,6 +116,7 @@ p {
     }
 }
 
+/* media query 48rem ipad landscape */
 @media screen and (min-width: 48rem) {
     .container {
         display: grid;
@@ -151,11 +152,10 @@ p {
     }
 }
 
-
 /* media query 64rem laptop screen */
 
 @media screen and (min-width:64rem) {
-    /*general layout */
+    /* general layout */
     .container {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
