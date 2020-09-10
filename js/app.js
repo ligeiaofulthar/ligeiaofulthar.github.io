@@ -98,7 +98,7 @@ const links = document.querySelectorAll(".header__nav-link");
 
 let link;
 
-window.addEventListener('scroll', function (event) {
+window.addEventListener('scroll', function () {
     sections.forEach((section)=>{
         if (inViewport(section)) {
             section.classList.add("super");
