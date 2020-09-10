@@ -9,23 +9,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function inViewport (elem) {
 	let distance = elem.getBoundingClientRect();
 	return (
-		distance.top >= 0 &&
-		distance.left >= 0 &&
+		distance.top >= -30 &&
+		distance.left >= -30 &&
 		distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
 		distance.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
 };
 
 // get every h1
-const sectionH = document.getElementsByTagName('h1');
+const headlines = document.querySelectorAll('h1');
 
 // make an empty array
 const sectionArray = [];
 
 // loop trough the array of h1s
-for (h = 0; h < sectionH.length; h++) {
+for (h = 0; h < headlines.length; h++) {
     // get the text of h1
-    let link = sectionH[h].innerText;
+    let link = headlines[h].innerText;
     //push the text of h1 back into the former empty array sectionArray
     sectionArray.push(link);
 }
@@ -117,7 +117,6 @@ window.addEventListener('scroll', function (event) {
 });
 
 // get headlines
-const headlines = document.querySelectorAll('h1');
 const headlinesId = [];
 
 // function headline(){
