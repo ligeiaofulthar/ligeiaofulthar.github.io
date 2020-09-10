@@ -105,7 +105,7 @@ p {
         font-size: 1rem;
     }
     section {
-        height: auto;
+        height: 60vh;
     }
     #navi {
         padding: 0;
@@ -149,6 +149,9 @@ p {
     }
     #navi {
         font-size: 1rem;
+    }
+    section {
+        height: auto;
     }
 }
 
