@@ -1,6 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 });
 
+// get every h1
+const headlines = document.querySelectorAll('h1');
+
+// make an empty array
+const sectionArray = [];
+
+// define nav
+const nav = document.querySelector('.nav__menu');
+
 //helper function for inViewport
 function inViewport (elem) {
 	let distance = elem.getBoundingClientRect();
@@ -11,12 +20,6 @@ function inViewport (elem) {
 		distance.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
 };
-
-// get every h1
-const headlines = document.querySelectorAll('h1');
-
-// make an empty array
-const sectionArray = [];
 
 function getH1(){
     // loop trough the array of h1s
@@ -50,8 +53,7 @@ function headlineToSectionId(){
 }
 
 /* build dynamic navigation */
-// define nav
-const nav = document.querySelector('.nav__menu');
+
 getH1();
 
 // create a navigation from the h1s
